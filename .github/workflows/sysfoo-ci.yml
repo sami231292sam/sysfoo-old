@@ -1,32 +1,27 @@
-name: sysfoo-ci-pipeline
+name: sysfoo-ci
 on:
   push:
     branches:
-      - 'master
-     
+      - 'master'
 jobs:
-  sysfoo-ci-jobs:
+  sysfoo-ci-jb:
     runs-on: ubuntu-latest
     steps:
-      - name: Hello World
+      - name: Hello Swiss
         run: echo "Welcome to sysfoo"
-        
-      - name: code checkout
+      - name: Code checkout
         uses: actions/checkout@v6
-        
       - name: Test
         run: mvn test
-        
-      - name: clean
+      - name: Clean Package
         run: mvn clean
-        
-      - name: package
+      - name: Package
         run: mvn package
-
-      - name: View files
+      - name: View file
         run: ls -lrt target
+ 
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
-        with: 
+        with:
           name: sysfoo
-          path: target/**.war
-      
+          path: traget/**.war
